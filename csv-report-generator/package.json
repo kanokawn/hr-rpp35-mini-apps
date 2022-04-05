@@ -1,0 +1,17 @@
+{
+  "scripts": {
+    "start": "nodemon --ignore node_modules server"
+  },
+  "dependencies": {
+    "body-parser": "^1.20.0",
+    "express": "^4.17.3",
+    "nodemon": "^2.0.15"
+  },
+  "name": "csv-report-generator",
+  "version": "1.0.0",
+  "description": "Learn how to generate CSV reports",
+  "main": "index.js",
+  "devDependencies": {},
+  "author": "",
+  "license": "ISC"
+}
