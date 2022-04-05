@@ -114,36 +114,50 @@ var checkWin = function (mark, row, column) {
 
 let cells = document.querySelectorAll('td');
 
-for (var i = 0; i < cells.length; i++) {
-  cells[i].onclick = function(event) {
-    let row = Number(this.parentNode.uniqueId);
-    let column = Number(this.uniqueId);
-    if (this.innerHTML === '' && !winner) {
-      if (eventCounter % 2 === 0) {
-        eventCounter++;
-        this.innerHTML = 'X';
-        ticTacToeObj[row][column] = 'X';
-        if (checkWin('X', row, column)) {
-          alert('X has won!')
-          winner = 'X';
-        };
+var createOnClickCells = function () {
+  for (var i = 0; i < cells.length; i++) {
+    cells[i].onclick = function(event) {
+      let row = Number(this.parentNode.uniqueId);
+      let column = Number(this.uniqueId);
+      if (this.innerHTML === '' && !winner) {
+        if (eventCounter % 2 === 0) {
+          eventCounter++;
+          this.innerHTML = 'X';
+          ticTacToeObj[row][column] = 'X';
+          if (checkWin('X', row, column)) {
+            alert('X has won!')
+            winner = 'X';
+          };
+        } else {
+          eventCounter++;
+          this.innerHTML = 'O';
+          ticTacToeObj[this.parentNode.uniqueId][this.uniqueId] = 'O';
+          if (checkWin('O', row, column)) {
+            alert('O has won!')
+            winner = 'O';
+          };
+        }
       } else {
-        eventCounter++;
-        this.innerHTML = 'O';
-        ticTacToeObj[this.parentNode.uniqueId][this.uniqueId] = 'O';
-        if (checkWin('O', row, column)) {
-          alert('O has won!')
-          winner = 'O';
-        };
-      }
-    } else {
-      if (eventCounter === 9) {
-        alert('There is a tie!');
-      } else if (winner) {
-        alert(`Player ${winner} has won!`);
-      } else {
-        alert('A mark has already been placed here.');
+        if (eventCounter === 9) {
+          alert('There is a tie!');
+        } else if (winner) {
+          alert(`Player ${winner} has won!`);
+        } else {
+          alert('A mark has already been placed here.');
+        }
       }
     }
   }
 }
+
+createOnClickCells();
+
+module.exports = {
+  createTable,
+  createResetButton,
+  checkDiag,
+  checkHorizontal,
+  checkVertical,
+  checkWin,
+  createOnClickCells
+};
